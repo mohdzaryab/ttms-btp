@@ -1,0 +1,4 @@
+{
+    "mongoURI":
+      "mongodb+srv://ttms-dev:timetable321@cluster0.3zk6h.mongodb.net/Cluster0?retryWrites=true&w=majority"
+  }
