@@ -39,6 +39,35 @@ app.get('/add-course', (req,res) => {
     course.save();
 });
 
+app.get('/add-courses', (req,res)=> {
+    const jsonArray = [
+        {
+            Code: 'EEN-305',
+            Title: 'Advanced Control Systems',
+            Cat: 'DCC',
+            Credits: 4,
+            L: 3,
+            T: 1,
+            P: 2,
+            numberOfStudents: 165,
+            teacher: 'VP'
+        },
+        {
+            Code: 'EEN-310',
+            Title: 'Power systems',
+            Cat: 'DCC',
+            Credits: 4,
+            L: 3,
+            T: 1,
+            P: 2,
+            numberOfStudents: 165,
+            teacher: 'BD'
+        }
+    ]
+
+    Course.insertMany(jsonArray);
+})
+
 const port = process.env.PORT || 3001;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
