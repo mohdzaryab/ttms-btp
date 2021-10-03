@@ -2,19 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const courseSchema = new Schema({
-    Code: {
+    code: {
         type: String,
         required: true
     },
-    Title: {
+    title: {
         type: String,
         required: true
     },
-    Cat: {
+    cat: {
         type: String,
         required: true
     },
-    Credits: {
+    credits: {
         type: Number,
         required: true
     },
@@ -36,6 +36,10 @@ const courseSchema = new Schema({
     },
     teacher: {
         type: String,
+        required: true
+    },
+    year: {
+        type: Number,
         required: true
     }
 });
