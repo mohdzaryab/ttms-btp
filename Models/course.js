@@ -41,7 +41,12 @@ const courseSchema = new Schema({
     year: {
         type: Number,
         required: true
+    },
+    slotAssigned: {
+        type: String,
+        default: 'NULL'
     }
+
 });
 
 const Course = mongoose.model('Course', courseSchema);

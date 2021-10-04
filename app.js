@@ -3,7 +3,8 @@
 const express = require('express');
 const connectDB = require('./config/db');
 var cors = require('cors');
-const courseRoutes = require('./Routes/courseRoutes');
+const courseRoutes = require('./Routes/courseRoutes.js');
+const slotRoutes = require('./Routes/slotRoutes.js');
 
 // routes
 //const books = require('./routes/api/books');
@@ -20,6 +21,9 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) => res.send('Hello world!'));
+
+// Slot routes
+app.use('/slots',slotRoutes);
 
 // Course routes
 app.use('/courses', courseRoutes);
