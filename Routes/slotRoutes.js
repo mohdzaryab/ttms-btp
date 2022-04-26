@@ -546,7 +546,7 @@ routerSlots.get('/add-slots', async (req,res) => {
 
 routerSlots.get('/assign-courses', async (req,res) => {
     
-    for(let curYear=1;curYear <=5; curYear++)
+    for(let curYear=1;curYear <=3; curYear++)
     {
         let availCourses = await Course.find({year: curYear});
         let availSlots = await Slot.find({year: curYear, isEmpty: true});
@@ -590,6 +590,65 @@ routerSlots.get('/assign-courses', async (req,res) => {
     Slot.find({}).populate('courseAssigned');
 });
 
+routerSlots.get('/assign-finalYear-electives', async (req,res) => {
+    let availCourses = await Course.find({year: curYear});
+    let availSlots = await Slot.find({year: curYear, isEmpty: true});
+
+
+    availCourses.forEach( async (course) => {
+        let flag = false;
+
+        let studentList = await Course.find({courseId: course._id});
+
+        unordered_map<int,int> mp;
+
+        for(let  i=0;i<studentList.size();i++){
+            mp[studentList[i].enrollmentNumber]++;
+        }
+        
+
+            for(let i = 0; i< availSlots.length; i++){
+
+                let check = await Slot.exists({name: availSlots[i].name, profAssigned: course.teacher});
+
+                let studentCheck = true;
+
+                if(availSlots.courseAssigned.length()){
+                    for(let j=0;j<availSlots.courseAssigned.length();j++){
+                        let studentsEnrolled = await Course.find({courseId: course._id});
+
+                        for(let k=0;k<studentsEnrolled.length();k++){
+                            if(mp[studentsEnrolled[k].enrollmentNumber]){
+                                studentCheck = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if(!check && studentCheck){
+                    flag = true;
+                    availSlots[i].courseAssigned.push( course._id);
+                    availSlots[i].profAssigned.push( course.teacher);
+                    availSlots[i].save()
+                    .then(data => console.log(data));
+                    course.slotAssigned = availSlots[i].name;
+                    break;
+                }
+                                      
+
+            }
+
+            if(flag) course.save();
+
+        
+        
+    })
+    Slot.find({}).populate('courseAssigned');
+
+});
+
+
 routerSlots.get('/del-slots', (req,res) => {
     Slot.deleteMany({})
     .then(res => console.log(res))
@@ -609,6 +668,7 @@ routerSlots.get('/assign-tut',async (req,res) => {
         console.log(availCourses)
         console.log("Done")
         let availSlots = await tutSlot.find({year: curYear, isEmpty: true});
+        
         let enumCourses=[];
         availCourses.forEach(course => {
             if(course.T!=0){
@@ -647,7 +707,7 @@ routerSlots.get('/assign-tut',async (req,res) => {
                     
                 }
                 if(isAlloted){
-                    break
+                    break;
                 }
             }
         }
