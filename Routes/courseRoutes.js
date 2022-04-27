@@ -41,6 +41,42 @@ router.get('/add-courses', (req,res)=> {
             year: 3
         },
         {
+            code: 'EEN-303',
+            title: 'Power Electronics',
+            cat: 'DCC',
+            credits: 4,
+            L: 3,
+            T: 1,
+            P: 2,
+            numberOfStudents: 165,
+            teacher: 'SGC',
+            year: 3
+        },
+        {
+            code: 'EEN-301',
+            title: 'Power System Analysis and Control',
+            cat: 'DCC',
+            credits: 4,
+            L: 3,
+            T: 1,
+            P: 2,
+            numberOfStudents: 165,
+            teacher: 'BD',
+            year: 3
+        },
+        {
+            code: 'EEN-358',
+            title: 'Data Structures',
+            cat: 'DCC',
+            credits: 4,
+            L: 3,
+            T: 1,
+            P: 2,
+            numberOfStudents: 165,
+            teacher: 'IG',
+            year: 3
+        },
+        {
             code: 'EEN-205',
             title: 'Control Systems',
             cat: 'DCC',

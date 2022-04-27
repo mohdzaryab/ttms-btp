@@ -548,7 +548,7 @@ routerSlots.get('/get-lecture-slots',async(req,res) => {
 });
 
 routerSlots.get('/get-tut-slots',async(req,res) => {
-    let availableTutorialSlots = await Slot.find({});
+    let availableTutorialSlots = await tutSlot.find({});
     res.send(availableTutorialSlots);
 });
 
