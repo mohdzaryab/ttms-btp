@@ -542,7 +542,10 @@ routerSlots.get('/add-slots', async (req,res) => {
     else console.log("Slots exist");
 });
 
-
+routerSlots.get('/get-courses',async(req,res) => {
+    let availableCourses = await Course.find({});
+    res.send(availableCourses);
+});
 
 routerSlots.get('/assign-courses', async (req,res) => {
     
