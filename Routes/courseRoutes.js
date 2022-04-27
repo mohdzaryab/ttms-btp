@@ -93,4 +93,9 @@ router.get('/del-courses', (req,res) => {
     .catch(err => console.log(err));
 });
 
+router.get('/get-courses',async(req,res) => {
+    let availableCourses = await Course.find({});
+    res.send(availableCourses);
+});
+
 module.exports = router;
